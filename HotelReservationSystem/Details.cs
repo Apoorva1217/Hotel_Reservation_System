@@ -94,6 +94,16 @@ namespace HotelReservationSystem
                     Console.WriteLine("Hotel Name: " + hotels.hotelName + "\nTotal Price: " + hotels.totalPrice + "\nRating: " + hotels.RatingsForHotel);
                 }
             }
+
+            ///UC 7 Ability to find Best Rated Hotel for given date range
+            foreach (HotelReservation hotels in ratelist)
+            {
+                if (hotels.RatingsForHotel == ratelist.Max(s => s.RatingsForHotel))
+                {
+                    Console.WriteLine("-----Best Rated Hotel-----");
+                    Console.WriteLine("Hotel Name: " + hotels.hotelName + "\nTotal Price: " + hotels.totalPrice + "\nRating: " + hotels.RatingsForHotel);
+                }
+            }
         }
     }
 }
