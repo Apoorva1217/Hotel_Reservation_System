@@ -15,14 +15,15 @@ namespace HotelReservationSystem
         /// </summary>
         public void AddHotelAndRate()
         {
-            ///UC 3 Ability to add weekday and weekend rates for each Hotel 
-            hotellist.Add(new HotelReservation("Lakewood", 110,90));
-            hotellist.Add(new HotelReservation("Bridgewood", 160,60));
-            hotellist.Add(new HotelReservation("Ridgewood", 220,150));
+            ///UC 3 Ability to add weekday and weekend rates for each Hotel
+            ///UC 5 Ability to add ratings to each hotel
+            hotellist.Add(new HotelReservation("Lakewood", 110,90,3));
+            hotellist.Add(new HotelReservation("Bridgewood", 160,60,4));
+            hotellist.Add(new HotelReservation("Ridgewood", 220,150,5));
             foreach (HotelReservation entry in hotellist)
             {
                 Console.WriteLine("Hotel Name: " + entry.HotelName + "\nWeekday Rate for Regular Customer: " + entry.WeekdayRateForRegularCustomer 
-                    + "\nWeekend Rate For Regular Customer: " + entry.WeekendRateForRegularCustomer 
+                    + "\nWeekend Rate For Regular Customer: " + entry.WeekendRateForRegularCustomer + "\nHotel Ratings: " + entry.RatingsForHotel
                     + "\n/---------------------------------------------/");
             }
         }
