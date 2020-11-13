@@ -7,15 +7,18 @@ namespace HotelReservationSystem
     public class HotelReservation
     {
         public string hotelName;
-        public int rateForRegularCustomer;
+        public int weekdayRateForRegularCustomer;
+        public int weekendRateForRegularCustomer;
 
-        public HotelReservation(string hotelName, int rateForRegularCustomer)
+        public HotelReservation(string hotelName, int weekdayRateForRegularCustomer, int weekendRateForRegularCustomer)
         {
             this.hotelName = hotelName;
-            this.rateForRegularCustomer = rateForRegularCustomer;
+            this.weekdayRateForRegularCustomer = weekdayRateForRegularCustomer;
+            this.weekendRateForRegularCustomer = weekendRateForRegularCustomer;
         }
 
         public string HotelName { get => this.hotelName; set => this.hotelName = value; }
-        public int RateForRegularCustomer { get => this.rateForRegularCustomer; set => this.rateForRegularCustomer = value; }
+        public int WeekdayRateForRegularCustomer { get => this.weekdayRateForRegularCustomer; set => this.weekdayRateForRegularCustomer = value; }
+        public int WeekendRateForRegularCustomer { get => this.weekendRateForRegularCustomer; set => this.weekendRateForRegularCustomer = value; }
     }
 }

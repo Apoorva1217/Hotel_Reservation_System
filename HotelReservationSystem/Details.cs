@@ -15,12 +15,14 @@ namespace HotelReservationSystem
         /// </summary>
         public void AddHotelAndRate()
         {
-            hotellist.Add(new HotelReservation("Lakewood", 110));
-            hotellist.Add(new HotelReservation("Bridgewood", 160));
-            hotellist.Add(new HotelReservation("Ridgewood", 220));
+            ///UC 3 Ability to add weekday and weekend rates for each Hotel 
+            hotellist.Add(new HotelReservation("Lakewood", 110,90));
+            hotellist.Add(new HotelReservation("Bridgewood", 160,60));
+            hotellist.Add(new HotelReservation("Ridgewood", 220,150));
             foreach (HotelReservation entry in hotellist)
             {
-                Console.WriteLine("Hotel Name: " + entry.HotelName + "\nRate for Regular Customer: " + entry.RateForRegularCustomer
+                Console.WriteLine("Hotel Name: " + entry.HotelName + "\nWeekday Rate for Regular Customer: " + entry.WeekdayRateForRegularCustomer 
+                    + "\nWeekend Rate For Regular Customer: " + entry.WeekendRateForRegularCustomer 
                     + "\n/---------------------------------------------/");
             }
         }
@@ -40,7 +42,7 @@ namespace HotelReservationSystem
                 int totalPrice = 0;
                 for (int i = 0; i <= totalDays.TotalDays; i++)
                 {
-                    totalPrice += hotels.RateForRegularCustomer;
+                    totalPrice += hotels.WeekdayRateForRegularCustomer;
                 }
                 Console.WriteLine("Hotel Name: " + hotels.HotelName + "\nTotal Price: " + totalPrice);
                 dictionary.Add(totalPrice, hotels.HotelName);
