@@ -11,6 +11,7 @@ namespace HotelReservationSystem
         Dictionary<int, string> dictionary = new Dictionary<int, string>();
         List<HotelReservation> ratelist = new List<HotelReservation>();
         List<HotelReservation> minpricelist = new List<HotelReservation>();
+        List<HotelReservation> rewardlist = new List<HotelReservation>();
 
         /// <summary>
         /// UC 1 Ability to Add Hotel with Name and Rates for Regular Customer
@@ -27,6 +28,17 @@ namespace HotelReservationSystem
                 Console.WriteLine("Hotel Name: " + entry.HotelName + "\nWeekday Rate for Regular Customer: " + entry.WeekdayRateForRegularCustomer 
                     + "\nWeekend Rate For Regular Customer: " + entry.WeekendRateForRegularCustomer + "\nHotel Ratings: " + entry.RatingsForHotel
                     + "\n/---------------------------------------------/");
+            }
+
+            ///UC 8 Ability to add Reward Customer with weekday and weekend rates
+            rewardlist.Add(new HotelReservation("Lakewood", 80, 80));
+            rewardlist.Add(new HotelReservation("Bridgewood", 110, 50));
+            rewardlist.Add(new HotelReservation("Ridgewood", 100, 40));
+            foreach (HotelReservation entry in rewardlist)
+            {
+                Console.WriteLine("Hotel Name: " + entry.HotelName + "\nWeekday Rate for Regular Customer: "
+                    + entry.WeekdayRateForRewardCustomer + "\nWeekend Rate For Regular Customer: "
+                    + entry.WeekendRateForRewardCustomer + "\n/******************************************/");
             }
         }
 
