@@ -9,6 +9,8 @@ namespace HotelReservationSystem
     {
         List<HotelReservation> hotellist = new List<HotelReservation>();
         Dictionary<int, string> dictionary = new Dictionary<int, string>();
+        List<HotelReservation> ratelist = new List<HotelReservation>();
+        List<HotelReservation> minpricelist = new List<HotelReservation>();
 
         /// <summary>
         /// UC 1 Ability to Add Hotel with Name and Rates for Regular Customer
@@ -55,6 +57,7 @@ namespace HotelReservationSystem
                 }
                 Console.WriteLine("Hotel Name: " + hotels.HotelName + "\nTotal Price: " + totalPrice);
                 dictionary.Add(totalPrice, hotels.HotelName);
+                ratelist.Add(new HotelReservation(totalPrice, hotels.hotelName, hotels.RatingsForHotel));
             }
 
             ///UC 2 Ability to Find the cheapest hotel for given date range
@@ -64,6 +67,32 @@ namespace HotelReservationSystem
                 var sort = dictionary.OrderBy(sort => sort.Key).First();
                 Console.WriteLine("Hotel Name: " + sort.Value + "\nTotal Price: " + sort.Key);
                 break;
+            }
+        }
+
+        /// <summary>
+        /// UC 6 Ability to find the cheapest best rated hotel for a given Date Range 
+        /// </summary>
+        /// <param name="checkInDate"></param>
+        /// <param name="checkOutDate"></param>
+        /// <param name="checkInDay"></param>
+        public void FindCheapestHotelWithRatings(DateTime checkInDate, DateTime checkOutDate, string checkInDay)
+        {
+            FindCheapestHotel(checkInDate, checkOutDate, checkInDay);
+            foreach (HotelReservation hotels in ratelist.OrderBy(s => s.totalPrice).ToList())
+            {
+                if (hotels.totalPrice == ratelist.Min(s => s.totalPrice))
+                {
+                    minpricelist.Add(hotels);
+                }
+            }
+            foreach (HotelReservation hotels in minpricelist)
+            {
+                if (hotels.RatingsForHotel == minpricelist.Max(s => s.RatingsForHotel))
+                {
+                    Console.WriteLine("-----Cheapest Best Rated Hotel with Total Price and Hotel Ratings-----");
+                    Console.WriteLine("Hotel Name: " + hotels.hotelName + "\nTotal Price: " + hotels.totalPrice + "\nRating: " + hotels.RatingsForHotel);
+                }
             }
         }
     }
