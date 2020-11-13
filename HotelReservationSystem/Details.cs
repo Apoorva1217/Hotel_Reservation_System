@@ -33,16 +33,24 @@ namespace HotelReservationSystem
         /// <param name="checkInDate"></param>
         /// <param name="checkOutDate"></param>
         /// <param name="checkInDay"></param>
-        public void FindCheapestHotel(DateTime checkInDate, DateTime checkOutDate)
+        public void FindCheapestHotel(DateTime checkInDate, DateTime checkOutDate, string checkInDay)
         {
             TimeSpan totalDays = checkOutDate.Subtract(checkInDate);
             Console.WriteLine("-----Hotel Name with Total Price-----");
             foreach (HotelReservation hotels in hotellist)
             {
                 int totalPrice = 0;
+                ///UC 4 Ability to find the cheapest Hotel for a given Date Range based on weekday and weekend
                 for (int i = 0; i <= totalDays.TotalDays; i++)
                 {
-                    totalPrice += hotels.WeekdayRateForRegularCustomer;
+                    if (checkInDay.Equals("Saturday") || checkInDay.Equals("Sunday"))
+                    {
+                        totalPrice += hotels.WeekendRateForRegularCustomer;
+                    }
+                    else
+                    {
+                        totalPrice += hotels.WeekdayRateForRegularCustomer;
+                    }
                 }
                 Console.WriteLine("Hotel Name: " + hotels.HotelName + "\nTotal Price: " + totalPrice);
                 dictionary.Add(totalPrice, hotels.HotelName);
@@ -52,7 +60,8 @@ namespace HotelReservationSystem
             Console.WriteLine("-----Cheapest Hotel with Total Price-----");
             foreach (var hotelPrice in dictionary)
             {
-                Console.WriteLine("Hotel Name: " + hotelPrice.Value + "\nTotal Price: " + hotelPrice.Key);
+                var sort = dictionary.OrderBy(sort => sort.Key).First();
+                Console.WriteLine("Hotel Name: " + sort.Value + "\nTotal Price: " + sort.Key);
                 break;
             }
         }

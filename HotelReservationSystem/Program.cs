@@ -15,7 +15,9 @@ namespace HotelReservationSystem
             string checkOut = Console.ReadLine();
             DateTime checkInDate = DateTime.Parse(checkIn);
             DateTime checkOutDate = DateTime.Parse(checkOut);
-            details.FindCheapestHotel(checkInDate, checkOutDate);
+            Console.WriteLine("Enter Check-In day");
+            string checkInDay = Console.ReadLine();
+            details.FindCheapestHotel(checkInDate, checkOutDate, checkInDay);
         }
     }
 }

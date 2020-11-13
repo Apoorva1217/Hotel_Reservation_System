@@ -16,6 +16,6 @@ namespace HotelReservationSystem
         /// </summary>
         /// <param name="checkInDate"></param>
         /// <param name="checkOutDate"></param>
-        public void FindCheapestHotel(DateTime checkInDate, DateTime checkOutDate);
+        public void FindCheapestHotel(DateTime checkInDate, DateTime checkOutDate, string checkInDay);
     }
 }
