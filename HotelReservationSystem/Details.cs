@@ -18,7 +18,7 @@ namespace HotelReservationSystem
         /// </summary>
         public void AddHotelAndRate(string customer)
         {
-            if (customer.Equals("Regular"))
+            if (customer.Equals("Regular",StringComparison.CurrentCultureIgnoreCase))
             {
                 ///UC 3 Ability to add weekday and weekend rates for each Hotel
                 ///UC 5 Ability to add ratings to each hotel
@@ -32,7 +32,7 @@ namespace HotelReservationSystem
                         + "\n/---------------------------------------------/");
                 }
             }
-            else if(customer.Equals("Reward"))
+            else if(customer.Equals("Reward",StringComparison.CurrentCultureIgnoreCase))
             {
                 ///UC 8 Ability to add Reward Customer with weekday and weekend rates
                 hotellist.Add(new HotelReservation("Lakewood", 80, 80,3));
@@ -61,24 +61,31 @@ namespace HotelReservationSystem
         {
             TimeSpan totalDays = checkOutDate.Subtract(checkInDate);
             Console.WriteLine("-----Hotel Name with Total Price-----");
-            foreach (HotelReservation hotels in hotellist)
+            if (checkInDate < checkOutDate)
             {
-                int totalPrice = 0;
-                ///UC 4 Ability to find the cheapest Hotel for a given Date Range based on weekday and weekend
-                for (int i = 0; i <= totalDays.TotalDays; i++)
+                foreach (HotelReservation hotels in hotellist)
                 {
-                    if (checkInDay.Equals("Saturday") || checkInDay.Equals("Sunday"))
+                    int totalPrice = 0;
+                    ///UC 4 Ability to find the cheapest Hotel for a given Date Range based on weekday and weekend
+                    for (int i = 0; i <= totalDays.TotalDays; i++)
                     {
-                        totalPrice += hotels.WeekendRate;
+                        if (checkInDay.Equals("Saturday", StringComparison.CurrentCultureIgnoreCase) || checkInDay.Equals("Sunday", StringComparison.CurrentCultureIgnoreCase))
+                        {
+                            totalPrice += hotels.WeekendRate;
+                        }
+                        else
+                        {
+                            totalPrice += hotels.WeekdayRate;
+                        }
                     }
-                    else
-                    {
-                        totalPrice += hotels.WeekdayRate;
-                    }
+                    Console.WriteLine("Hotel Name: " + hotels.HotelName + "\nTotal Price: " + totalPrice);
+                    dictionary.Add(totalPrice, hotels.HotelName);
+                    ratelist.Add(new HotelReservation(totalPrice, hotels.hotelName, hotels.RatingsForHotel));
                 }
-                Console.WriteLine("Hotel Name: " + hotels.HotelName + "\nTotal Price: " + totalPrice);
-                dictionary.Add(totalPrice, hotels.HotelName);
-                ratelist.Add(new HotelReservation(totalPrice, hotels.hotelName, hotels.RatingsForHotel));
+            }
+            else
+            {
+                throw new CustomException("Invalid Date", CustomException.exceptionType.INVALID_DATE);
             }
 
             ///UC 2 Ability to Find the cheapest hotel for given date range
@@ -100,16 +107,16 @@ namespace HotelReservationSystem
         public void FindCheapestHotelWithRatings(DateTime checkInDate, DateTime checkOutDate, string checkInDay)
         {
             FindCheapestHotel(checkInDate, checkOutDate, checkInDay);
-            foreach (HotelReservation hotels in ratelist.OrderBy(s => s.totalPrice).ToList())
+            foreach (HotelReservation hotels in ratelist.OrderBy(sort => sort.totalPrice).ToList())
             {
-                if (hotels.totalPrice == ratelist.Min(s => s.totalPrice))
+                if (hotels.totalPrice == ratelist.Min(sort => sort.totalPrice))
                 {
                     minpricelist.Add(hotels);
                 }
             }
             foreach (HotelReservation hotels in minpricelist)
             {
-                if (hotels.RatingsForHotel == minpricelist.Max(s => s.RatingsForHotel))
+                if (hotels.RatingsForHotel == minpricelist.Max(sort => sort.RatingsForHotel))
                 {
                     Console.WriteLine("-----Cheapest Best Rated Hotel with Total Price and Hotel Ratings-----");
                     Console.WriteLine("Hotel Name: " + hotels.hotelName + "\nTotal Price: " + hotels.totalPrice + "\nRating: " + hotels.RatingsForHotel);
@@ -119,7 +126,7 @@ namespace HotelReservationSystem
             ///UC 7 Ability to find Best Rated Hotel for given date range
             foreach (HotelReservation hotels in ratelist)
             {
-                if (hotels.RatingsForHotel == ratelist.Max(s => s.RatingsForHotel))
+                if (hotels.RatingsForHotel == ratelist.Max(sort => sort.RatingsForHotel))
                 {
                     Console.WriteLine("-----Best Rated Hotel-----");
                     Console.WriteLine("Hotel Name: " + hotels.hotelName + "\nTotal Price: " + hotels.totalPrice + "\nRating: " + hotels.RatingsForHotel);
