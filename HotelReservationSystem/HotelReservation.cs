@@ -7,19 +7,16 @@ namespace HotelReservationSystem
     public class HotelReservation
     {
         public string hotelName;
-        public int weekdayRateForRegularCustomer;
-        public int weekendRateForRegularCustomer;
+        public int weekdayRate;
+        public int weekendRate;
         public int ratingsForHotel;
         public int totalPrice;
-        public int weekdayRateForRewardCustomer;
-        public int weekendRateForRewardCustomer;
 
-
-        public HotelReservation(string hotelName, int weekdayRateForRegularCustomer, int weekendRateForRegularCustomer, int ratingsForHotel)
+        public HotelReservation(string hotelName, int weekdayRate, int weekendRate, int ratingsForHotel)
         {
             this.hotelName = hotelName;
-            this.weekdayRateForRegularCustomer = weekdayRateForRegularCustomer;
-            this.weekendRateForRegularCustomer = weekendRateForRegularCustomer;
+            this.weekdayRate = weekdayRate;
+            this.weekendRate = weekendRate;
             this.ratingsForHotel = ratingsForHotel;
         }
 
@@ -30,19 +27,11 @@ namespace HotelReservationSystem
             this.ratingsForHotel = ratingsForHotel;
         }
 
-        public HotelReservation(string hotelName, int weekdayRateForRewardCustomer, int weekendRateForRewardCustomer)
-        {
-            this.hotelName = hotelName;
-            this.weekdayRateForRewardCustomer = weekdayRateForRewardCustomer;
-            this.weekendRateForRewardCustomer = weekendRateForRewardCustomer;
-        }
-
         public string HotelName { get => this.hotelName; set => this.hotelName = value; }
-        public int WeekdayRateForRegularCustomer { get => this.weekdayRateForRegularCustomer; set => this.weekdayRateForRegularCustomer = value; }
-        public int WeekendRateForRegularCustomer { get => this.weekendRateForRegularCustomer; set => this.weekendRateForRegularCustomer = value; }
+        public int WeekdayRate { get => this.weekdayRate; set => this.weekdayRate = value; }
+        public int WeekendRate { get => this.weekendRate; set => this.weekendRate = value; }
         public int RatingsForHotel { get => this.ratingsForHotel; set => this.ratingsForHotel = value; }
         public int TotalPrice { get => this.totalPrice; set => this.totalPrice = value; }
-        public int WeekdayRateForRewardCustomer { get => this.weekdayRateForRewardCustomer; set => this.weekdayRateForRewardCustomer = value; }
-        public int WeekendRateForRewardCustomer { get => this.weekendRateForRewardCustomer; set => this.weekendRateForRewardCustomer = value; }
+        
     }
 }

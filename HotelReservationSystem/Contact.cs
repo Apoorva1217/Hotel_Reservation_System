@@ -9,7 +9,7 @@ namespace HotelReservationSystem
         /// <summary>
         /// Add hotel names and rates
         /// </summary>
-        public void AddHotelAndRate();
+        public void AddHotelAndRate(string customer);
 
         /// <summary>
         /// Find cheapest hotel with rate

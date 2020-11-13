@@ -11,34 +11,43 @@ namespace HotelReservationSystem
         Dictionary<int, string> dictionary = new Dictionary<int, string>();
         List<HotelReservation> ratelist = new List<HotelReservation>();
         List<HotelReservation> minpricelist = new List<HotelReservation>();
-        List<HotelReservation> rewardlist = new List<HotelReservation>();
 
         /// <summary>
         /// UC 1 Ability to Add Hotel with Name and Rates for Regular Customer
+        /// UC 9 Ability to find the cheapest best rated hotel Hotel for a given Date Range for a Reward Customer
         /// </summary>
-        public void AddHotelAndRate()
+        public void AddHotelAndRate(string customer)
         {
-            ///UC 3 Ability to add weekday and weekend rates for each Hotel
-            ///UC 5 Ability to add ratings to each hotel
-            hotellist.Add(new HotelReservation("Lakewood", 110,90,3));
-            hotellist.Add(new HotelReservation("Bridgewood", 160,60,4));
-            hotellist.Add(new HotelReservation("Ridgewood", 220,150,5));
-            foreach (HotelReservation entry in hotellist)
+            if (customer.Equals("Regular"))
             {
-                Console.WriteLine("Hotel Name: " + entry.HotelName + "\nWeekday Rate for Regular Customer: " + entry.WeekdayRateForRegularCustomer 
-                    + "\nWeekend Rate For Regular Customer: " + entry.WeekendRateForRegularCustomer + "\nHotel Ratings: " + entry.RatingsForHotel
-                    + "\n/---------------------------------------------/");
+                ///UC 3 Ability to add weekday and weekend rates for each Hotel
+                ///UC 5 Ability to add ratings to each hotel
+                hotellist.Add(new HotelReservation("Lakewood", 110, 90, 3));
+                hotellist.Add(new HotelReservation("Bridgewood", 160, 60, 4));
+                hotellist.Add(new HotelReservation("Ridgewood", 220, 150, 5));
+                foreach (HotelReservation entry in hotellist)
+                {
+                    Console.WriteLine("Hotel Name: " + entry.HotelName + "\nWeekday Rate for Regular Customer: " + entry.WeekdayRate
+                        + "\nWeekend Rate For Regular Customer: " + entry.WeekendRate + "\nHotel Ratings: " + entry.RatingsForHotel
+                        + "\n/---------------------------------------------/");
+                }
             }
-
-            ///UC 8 Ability to add Reward Customer with weekday and weekend rates
-            rewardlist.Add(new HotelReservation("Lakewood", 80, 80));
-            rewardlist.Add(new HotelReservation("Bridgewood", 110, 50));
-            rewardlist.Add(new HotelReservation("Ridgewood", 100, 40));
-            foreach (HotelReservation entry in rewardlist)
+            else if(customer.Equals("Reward"))
             {
-                Console.WriteLine("Hotel Name: " + entry.HotelName + "\nWeekday Rate for Regular Customer: "
-                    + entry.WeekdayRateForRewardCustomer + "\nWeekend Rate For Regular Customer: "
-                    + entry.WeekendRateForRewardCustomer + "\n/******************************************/");
+                ///UC 8 Ability to add Reward Customer with weekday and weekend rates
+                hotellist.Add(new HotelReservation("Lakewood", 80, 80,3));
+                hotellist.Add(new HotelReservation("Bridgewood", 110, 50,4));
+                hotellist.Add(new HotelReservation("Ridgewood", 100, 40,5));
+                foreach (HotelReservation entry in hotellist)
+                {
+                    Console.WriteLine("Hotel Name: " + entry.HotelName + "\nWeekday Rate for Reward Customer: " + entry.WeekdayRate
+                        + "\nWeekend Rate For Reward Customer: " + entry.WeekendRate + "\nHotel Ratings: " + entry.RatingsForHotel
+                        + "\n/---------------------------------------------/");
+                }
+            }
+            else
+            {
+                throw new CustomException("Invalid Customer Type", CustomException.exceptionType.INVALID_CUSTOMER);
             }
         }
 
@@ -60,11 +69,11 @@ namespace HotelReservationSystem
                 {
                     if (checkInDay.Equals("Saturday") || checkInDay.Equals("Sunday"))
                     {
-                        totalPrice += hotels.WeekendRateForRegularCustomer;
+                        totalPrice += hotels.WeekendRate;
                     }
                     else
                     {
-                        totalPrice += hotels.WeekdayRateForRegularCustomer;
+                        totalPrice += hotels.WeekdayRate;
                     }
                 }
                 Console.WriteLine("Hotel Name: " + hotels.HotelName + "\nTotal Price: " + totalPrice);
